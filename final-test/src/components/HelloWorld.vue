@@ -40,12 +40,15 @@
           ></v-text-field>
         </v-col>
       </v-row>
+      <v-row class="text-center">
+        <v-col>Max amount: 999</v-col>
+      </v-row>
       <v-row justify="center">
         <v-col cols="12" md="2">
-          <v-btn color="teal">Approve</v-btn>
+          <v-btn color="teal" @click="approve" block>Approve</v-btn>
         </v-col>
         <v-col cols="12" md="2">
-          <v-btn color="error" @click="transfer" :loading="loadingBtn"
+          <v-btn color="error" @click="transfer" :loading="loadingBtn" block
             >Transfer</v-btn
           >
         </v-col>
@@ -68,7 +71,7 @@
 <script>
 import { mapGetters } from "vuex";
 import getWeb3 from "../blockchain/getWeb3";
-
+const { ethers } = require("ethers");
 export default {
   name: "HelloWorld",
   props: {
@@ -90,6 +93,7 @@ export default {
   }),
   computed: {
     ...mapGetters({ getContract: "getContract" }),
+    ...mapGetters({ getContractBank: "getContractBank" }),
   },
   methods: {
     connectWallet() {
@@ -104,11 +108,12 @@ export default {
     },
     transfer() {
       if (this.$refs.transForm.validate()) {
-        const { ethers } = require("ethers");
+        // const { ethers } = require("ethers");
         const BigNumber = ethers.BigNumber;
         this.loadingBtn = true;
-        this.getContract.methods
-          .transfer(
+        console.log(this.addressReceiver);
+        this.getContractBank.methods
+          .transferBank(
             this.addressReceiver,
             BigNumber.from("" + this.amount * 1000000000000000000)
           )
@@ -125,6 +130,21 @@ export default {
             console.log("fail", err);
           });
       }
+    },
+    approve() {
+      const BigNumber2 = ethers.BigNumber;
+      this.getContract.methods
+        .approve(
+          "0x45C61361c5602fd04Ad36a73193B9CAEcaA4C0E9",
+          BigNumber2.from("" + 999 * 1000000000000000000)
+        )
+        .send({ from: this.account })
+        .then((res) => {
+          console.log("success", res.transactionHash);
+        })
+        .catch((err) => {
+          console.log("fail", err);
+        });
     },
   },
 };

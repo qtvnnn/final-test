@@ -7,10 +7,12 @@ export default new Vuex.Store({
   state: {
     account: "",
     contract: {},
+    contractBank: {},
   },
   getters: {
     getAccount: (state) => state.account,
     getContract: (state) => state.contract,
+    getContractBank: (state) => state.contractBank,
   },
   mutations: {
     SET_ACCOUNT: (state, account) => {
@@ -18,6 +20,9 @@ export default new Vuex.Store({
     },
     SET_CONTRACT: (state, contract) => {
       state.contract = contract;
+    },
+    SET_CONTRACT_BANK: (state, contractBank) => {
+      state.contractBank = contractBank;
     },
   },
   actions: {
