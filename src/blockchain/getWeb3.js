@@ -5,23 +5,34 @@ export default async () => {
 
   if (window.ethereum && window.ethereum.isMetaMask) {
     const network = window.ethereum.networkVersion;
+    console.log(network);
     switch (network) {
       case "1": {
-        alert("Please, connect network rinkeby !");
+        alert("Please, connect network testnet BSC !");
         window.ethereum.on("disconnect");
         return null;
       }
       case "2": {
-        alert("Please, connect network rinkeby !");
+        alert("Please, connect network testnet BSC !");
         window.ethereum.on("disconnect");
         return null;
       }
       case "3": {
-        alert("Please, connect network rinkeby !");
+        alert("Please, connect network testnet BSC !");
         window.ethereum.on("disconnect");
         return null;
       }
       case "4": {
+        alert("Please, connect network testnet BSC !");
+        window.ethereum.on("disconnect");
+        return null;
+      }
+      case "42": {
+        alert("Please, connect network testnet BSC !");
+        window.ethereum.on("disconnect");
+        return null;
+      }
+      case "97": {
         if (
           window.ethereum !== "undefined" &&
           typeof window.ethereum != "undefined"
@@ -47,13 +58,8 @@ export default async () => {
           return null;
         }
       }
-      case "42": {
-        alert("Please, connect network rinkeby !");
-        window.ethereum.on("disconnect");
-        return null;
-      }
       default: {
-        alert("Please, connect network rinkeby !");
+        alert("Please, connect network testnet BSC !");
         window.ethereum.on("disconnect");
         return null;
       }

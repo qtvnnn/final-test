@@ -5,6 +5,7 @@
 <script>
 import Web3 from "web3";
 import { mapGetters } from "vuex";
+import getContract from "../blockchain/getContract";
 import HelloWorld from "../components/HelloWorld";
 
 export default {
@@ -27,6 +28,10 @@ export default {
         web31.eth.getAccounts().then((res) => {
           this.$store.commit("SET_ACCOUNT", res[0]);
         });
+
+        const contract = getContract(web31);
+        this.$store.commit("SET_CONTRACT", contract);
+        console.log(contract.methods);
       }
     },
   },
