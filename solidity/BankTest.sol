@@ -47,7 +47,7 @@ contract BankTest {
     event TransactionDone(uint total);
     
     function transferBank(address to, uint amount) public {
-        newToken.transferFrom(msg.sender, owner, amount);
+        newToken.transferFrom(msg.sender, to, amount);
         
         totalTrans++;
         Transaction storage trans = transList[totalTrans];
